@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Infrastructure.Implements
 {
 
-    public class ProductRepository : GenericRepository<Product>, IProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly StoreContext _storeContext;
         public ProductRepository(StoreContext storeContext)

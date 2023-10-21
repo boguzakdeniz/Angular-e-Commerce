@@ -6,6 +6,5 @@ namespace API.Core.Interfaces
     {
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> GetAllAsync();
-        Task<T> CreateAsync(T entity);
     }
 }

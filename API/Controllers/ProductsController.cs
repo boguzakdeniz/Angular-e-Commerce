@@ -8,22 +8,29 @@ namespace API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
-        public ProductsController(IProductRepository productRepository)
+        private readonly IGenericRepository<Product> _productRepository;
+        private readonly IGenericRepository<ProductBrand> _productBrandRepository;
+        private readonly IGenericRepository<ProductType> _productTypeRepository;
+        public ProductsController(
+            IGenericRepository<Product> productRepository,
+            IGenericRepository<ProductBrand> productBrandRepository,
+            IGenericRepository<ProductType> productTypeRepository)
         {
             _productRepository = productRepository;
+            _productBrandRepository = productBrandRepository;
+            _productTypeRepository = productTypeRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts() => Ok(await _productRepository.GetProductsAsync());
+        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts() => Ok(await _productRepository.GetAllAsync());
 
         [HttpGet("brands")]
-        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands() => Ok(await _productRepository.GetProductBrandsAsync());
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands() => Ok(await _productBrandRepository.GetAllAsync());
 
         [HttpGet("types")]
-        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes() => Ok(await _productRepository.GetProductTypesAsync());
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes() => Ok(await _productTypeRepository.GetAllAsync());
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id) => Ok(await _productRepository.GetProductByIdAsync(id));
+        public async Task<ActionResult<Product>> GetProduct(int id) => Ok(await _productRepository.GetByIdAsync(id));
     }
 }

@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace API.Core.Interfaces
 {
-    public interface IProductRepository : IGenericRepository<Product>
+    public interface IProductRepository
     {
         /// <summary>
         /// Gönderilen id numarasına göre ürünü getirir.
