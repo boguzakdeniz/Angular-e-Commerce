@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -15,9 +15,15 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts() => Ok(await _productRepository.GetProductsAsync());
+        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts() => Ok(await _productRepository.GetProductsAsync());
+
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands() => Ok(await _productRepository.GetProductBrandsAsync());
+
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes() => Ok(await _productRepository.GetProductTypesAsync());
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Product>>> GetProduct(int id) => Ok(await _productRepository.GetProductByIdAsync(id));
+        public async Task<ActionResult<Product>> GetProduct(int id) => Ok(await _productRepository.GetProductByIdAsync(id));
     }
 }

@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace API.Core.Interfaces
 {
-    public interface IProductRepository
+    public interface IProductRepository : IGenericRepository<Product>
     {
         /// <summary>
         /// Gönderilen id numarasına göre ürünü getirir.
@@ -17,6 +17,11 @@ namespace API.Core.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<IReadOnlyList<Product>> GetProductsAsync();
+
+        Task<IReadOnlyList<ProductType>> GetProductTypesAsync();
+        Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync();
+
+
 
     }
 }
