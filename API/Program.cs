@@ -1,28 +1,27 @@
-using API.Data.DataContext;
+using API.Core.Interfaces;
+using API.Extensions;
+using API.Helpers;
+using API.Infrastructure.DataContext;
+using API.Infrastructure.Implements;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-builder.Services.AddDbContext<StoreContext>(option=>option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerDocumentation();
+builder.Services.AddApplicationServices(builder);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerDocumentation();
     app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+app.AddApplicationBuilder();
 
 app.MapControllers();
 
