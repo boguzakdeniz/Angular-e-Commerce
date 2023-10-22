@@ -16,7 +16,7 @@ namespace API.Controllers
         public ActionResult GetServerError()
         {
             var product = _storeContext.Products.Find(5);          
-            return Ok(product?.ToString());
+            return Ok(product.ToString());
         }
 
 

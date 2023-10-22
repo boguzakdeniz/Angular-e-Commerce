@@ -2,6 +2,9 @@
 {
     public class ApiResponse
     {
+        public int StatusCode { get; set; }
+        public string? Message { get; set; }
+
         public ApiResponse(int statusCode, string? message = null)
         {
             this.StatusCode = statusCode;
@@ -18,11 +21,6 @@
                 500 => "Server Error",
                 _ => "Unexpected Error"
             };
-
-        }
-
-
-        public int StatusCode { get; set; }
-        public string? Message { get; set; }
+        }       
     }
 }
