@@ -17,8 +17,6 @@ namespace API.Extensions
             //Dependency Injection
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IProductBrandRepository, ProductBrandRepository>();
-            services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
 
             //AutoMapper
             services.AddAutoMapper(typeof(MappingProfile));
